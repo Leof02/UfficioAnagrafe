@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="it">
+
+<head>
+    <title>Ufficio Anagrafe</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js "></script>
+    <script src="assets/js/jquery.dropotron.min.js "></script>
+    <script defer src="assets/js/mainResidenzePersona.js "></script>
+    <link rel="icon"
+        href="https://cdn.imgbin.com/24/12/12/imgbin-computer-icons-chart-data-analysis-statistics-computer-4epEZTJE6EU8YSiAusC9B6U6T.jpg">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/animation.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+</head>
+
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <section id="header">
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+
+
+                    <li class="current"><a href="index.html" class="button">Home</a></li>
+                    <li class="current">
+                        <div class="dropright">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Anagrafe
+                            </button>
+                            <div class="dropdown-menu ml-2" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="indexAnagrafica.html">Anagrafica</a>
+                                <a class="dropdown-item" href="indexNuovaRes.html">Residenza</a>
+                                <a class="dropdown-item" href="indexmatrimoni.html">Matrimoni</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Banner -->
+            <section>
+                <header class="header">
+                    <div class="text-box">
+                        <h1 class="heading-primary">
+                            <span class="heading-primary-main">Ufficio Anagrafe</span>
+                            <span class="heading-primary-sub">By ragazzi 4G e 4I</span>
+                        </h1>
+                    </div>
+                </header>
+            </section>
+            <!-- Intro -->
+        </section>
+        <!-- Main -->
+        <section id="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!--FORM-->
+                        <section id="tabella">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-12 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                    <h2 class="section-heading animated fadeIn delay-1s mb-0">Elenco Residenze Personali</h2>
+                                </div>
+                            </div>
+                            <div id="loading_screen" class="row justify-content-center text-center">
+                                <div style="position: relative;"> <img src="assets/css/images/gif.gif" id="loading_img"
+                                        alt=""></div>
+                            </div>
+                            <div class="row mb-3 mt-3">
+                                <div class="col-md-2 col-sm-4">
+                                    <div class="dataTables_length row" id="example_length"><label id="mostra"
+                                            class="col-5">Mostra</label><select name="example_length"
+                                            class="custom-select custom-select-sm form-control form-control-sm col-7"
+                                            id="shownumber">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-3"></div>
+                                <div class="col-md-1 col-1 d-flex justify-content-center align-item-center">
+                                    <button type="button" class="btn btn-success rounded-circle" data-toggle="modal"
+                                        data-target="#modalNuovaResidenza" id="aggiungiResidenza"><i class="fas fa-plus"></i></button>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="input-group md-form form-sm form-2 pl-0">
+                                        <input class="form-control my-0 py-1 amber-border" id="search" type="text"
+                                            placeholder="Cerca per codice carta identità" aria-label="Search">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text amber lighten-3" id="basic-text1"><i
+                                                    class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3 mt-3">
+                                <h2 id="nomePersonaSelezionata"></h2>
+                            </div>
+                            <table class="table table-hover shadow">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Regione</th>
+                                        <th scope="col">Provincia
+                                        </th>
+                                        <th scope="col">Comune</th>
+                                        <th scope="col">Indirizzo
+                                        </th>
+                                        <th scope="col">Data
+                                        </th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="persone">
+
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section id="footer">
+            <div class="container">
+                <div class="row pt-5" id="ultimo">
+                    <div class="col-md-8 col-sm-12">
+                        <section>
+                            <header>
+                                <h2>Informazioni sul PCTO</h2>
+                            </header>
+                            <ul class="dates">
+                                <li>
+                                    <span class="date">Feb<strong>10</strong></span>
+                                    <h3>Inizio della terza settimana di PCTO</h3>
+                                    <p>Una settimana molto impegnativa sta aspettando i nostri alunni. Dovranno
+                                        affrontare diverse prove a punti e nell'ultima parte della settimana, dovranno
+                                        lavorare ad un grande progetto che si rivelerà comune.</p>
+                                </li>
+                                <li>
+                                    <span class="date">Feb<strong>7</strong></span>
+                                    <h3>Termina la seconda settimana di PCTO</h3>
+                                    <p>Sono stati svolti diversi esercizi che hanno permesso la creazione di una
+                                        classifica.
+                                    </p>
+                                </li>
+                                <li>
+                                    <span class="date">Feb<strong>3</strong></span>
+                                    <h3>Inizio della seconda settimana</h3>
+                                    <p>Durante questa settimana, i ragazzi verrano divisi in gruppi per lavorare insieme
+                                        e gli verranno assegnati dei punti che influiranno sul voto finale!</p>
+                                </li>
+                                <li>
+                                    <span class="date">Gen <strong>31</strong></span>
+                                    <h3>Termina la prima settimana di PCTO</h3>
+                                    <p>Per i 12 ragazzi termina la prima delle quattro settimane di PCTO.</p>
+                                </li>
+                                <li>
+                                    <span class="date">Gen <strong>27</strong></span>
+                                    <h3>Primo giorno di PCTO!</h3>
+                                    <p>Inizia per 5 alunni della 4I e per 7 alunni della 4G il periodo di PCTO.</p>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <section>
+                            <header>
+                                <h2>Chi siamo?</h2>
+                            </header>
+                            <a class="image featured"><img
+                                    src="https://slabitalia.it/wp-content/uploads/2019/04/maggioli.jpg" alt=" " /></a>
+                            <p>
+                                Noi della Maggioli abbiamo i numeri, ma è perché da noi le persone contano e hanno
+                                sempre fatto la differenza. Siamo una Family Company fondata su pochi e semplici valori:
+                                cura delle persone, fiducia e rispetto reciproci, coerenza e collaborazione a tutti
+                                i livelli.
+                            </p>
+                            <footer>
+                                <ul class="actions">
+                                    <li><a href="https://it.wikipedia.org/wiki/Gruppo_Maggioli" class="button"
+                                            target="_blank">Scopri di più</a></li>
+                                </ul>
+                            </footer>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mt-5">
+                        <section>
+                            <header>
+                                <h2>Alunni della 4G</h2>
+                            </header>
+                            <ul class="divided">
+                                <li>Bertozzi Niccolo'</li>
+                                <li>Brocchi Matteo</li>
+                                <li>Moretti Riccardo</li>
+                                <li>Tamagnini Alex</li>
+                                <li>Drif Denis</li>
+                                <li>Boldrini Alessandro</li>
+                                <li>Cevoli Andrea</li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-4 mt-5">
+                        <section>
+                            <header>
+                                <h2>Alunni della 4I</h2>
+                            </header>
+                            <ul class="divided">
+                                <li>Loris Ferola</li>
+                                <li>Emanuele D'Alessio</li>
+                                <li>Dall'Ara Andrea</li>
+                                <li>Baldelli Davide</li>
+                                <li>Forlani Leonardo</li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-4 col-sm-12 mt-5">
+                        <section>
+                            <header>
+                                <h2>Gruppo Maggioli</h2>
+                            </header>
+                            <div class="row">
+                                <ul class="social">
+                                    <li><a class="icon brands fa-facebook-f"
+                                            href="https://www.facebook.com/GruppoMaggioli" target="blank"
+                                            id="facebook"><span class="label">Facebook</span></a></li>
+                                    <li><a class="icon brands fa-twitter" href="https://twitter.com/GruppoMaggioli"
+                                            target="blank"><span class="label">Twitter</span></a></li>
+                                    <li><a class="icon brands fa-chrome" href="https://www.maggioli.it" target="blank"
+                                            id="web"><span class="label">Sito</span></a></li>
+                                    <li>
+                                        <a class="icon brands fa-linkedin-in" id="in"
+                                            href="https://it.linkedin.com/jobs/search?keywords=gruppo%20maggioli&location=Rimini%2C%20Emilia%20Romagna%2C%20Italia&trk=homepage-basic_jobs-search-bar_search-submit&redirect=false&position=1&pageNum=0"><span
+                                                class="label">LinkedIn</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="contact">
+                                <li>
+                                    <h3>Indirizzo</h3>
+                                    <p>
+                                        Via del Carpino,8<br /> 47822 Santarcangelo di Romagna (RN)-Italia
+                                    </p>
+                                </li>
+                                <li>
+                                    <h3>Email</h3>
+                                    <p>maggiolispa@maggioli.it</p>
+                                </li>
+                                <li>
+                                    <h3>Telefono</h3>
+                                    <p>0541 628111</p>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <!-- Copyright -->
+                        <div id="copyright">
+                            <ul class="links">
+                                <li>Bertozzi Niccolo', Loris Ferola, Emanuele D'Alessio.</li>
+                                <li>Design: Gruppo Cane</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal input dati -->
+        <div class="modal fade" id="modalNuovaResidenza" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nuova residenza</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Comune</label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="comuni text-center rounded freccia" id="comuneNuovaRes">
+                                        <option value="" hidden>Seleziona comune</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Provincia</label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="province text-center rounded freccia" id="provinciaNuovaRes">
+                                        <option value="" hidden>Seleziona provincia</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Regione</label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="regioni text-center rounded freccia" id="regioneNuovaRes">
+                                        <option value="" hidden>Seleziona regione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Indirizzo</label>
+                                </div>
+                                <div class="col-8">
+                                    <input id="indirizzoNuovaRes" type="text" class="form-control"
+                                        placeholder="Via Girgio Pascoli">
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Data nuova residenza</label>
+                                </div>
+                                <div class="col-8">
+                                    <input id="dataNuovaRes" type="date" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                        <button type="button" class="btn btn-success btnAggiungiResidenza">Aggiungi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modifica i dati</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Comune</label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="comuniEdit text-center rounded freccia" id="comune">
+                                        <option value="" hidden>Seleziona comune</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Provincia</label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="provinceEdit text-center rounded freccia" id="provincia">
+                                        <option value="" hidden>Seleziona provincia</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Regione</label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="regioniEdit text-center rounded freccia" id="regione">
+                                        <option value="" hidden>Seleziona regione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Indirizzo</label>
+                                </div>
+                                <div class="col-8">
+                                    <input id="viamod" type="text" class="form-control"
+                                        placeholder="Via Girgio Pascoli">
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-4 text-left">
+                                    <label>Data di rilascio carta di identità</label>
+                                </div>
+                                <div class="col-8">
+                                    <input id="annomod" type="date" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                        <button type="button" class="btn btn-success inviaModifica">Modifica</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade alert" id="modalEliminaRes" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Attenzione!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Vuoi davvero eliminare questa residenza?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btnElimina" data-dismiss="modal">Elimina</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Annulla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/browser.min.js "></script>
+    <script src="assets/js/breakpoints.min.js "></script>
+    <script src="assets/js/util.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
