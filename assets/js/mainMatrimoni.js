@@ -35,6 +35,7 @@ $(function() {
 
         })
     };
+    var d1 = $.Deferred();
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -48,7 +49,7 @@ $(function() {
             document.getElementById("loading_screen").style.display = 'none';
         }
     });
-    if (!$.active) {
+    $.when(d1).then(function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
@@ -70,8 +71,9 @@ $(function() {
                     }
                 });
             }
-        })
-    }
+        });
+    });
+
     /*FILTRO REGIONI*/
     $(document).on("change", ".regioni", function() {
         $(".province").empty();

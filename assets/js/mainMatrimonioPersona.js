@@ -41,11 +41,13 @@ $(function() {
 
         })
     };
+    var d1 = $.Deferred();
     $.ajax({
         type: "GET",
         contentType: "application/json",
         url: "https://late-frost-5190.getsandbox.com/anagrafiche",
         dataType: "json",
+        async: "true",
         success: function(data) {
             $.each(data, function(i, value) {
                 persone.push(Object.assign({}, value))
@@ -58,15 +60,17 @@ $(function() {
             }
             CalcPag(persone);
             document.getElementById("loading_screen").style.display = 'none';
-        }
+            d1.resolve();
+        },
     });
-    if (!$.active) {
+    $.when(d1).then(function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
             url: "https://late-frost-5190.getsandbox.com/territorio",
             dataType: "json",
-            success: function(data) {
+            async: "true",
+            then: function(data) {
                 $.each(data, function(i, value) {
                     arrayTerritory.push(Object.assign({}, value))
                     arrayTerritory = arrayTerritory[0];
@@ -83,7 +87,7 @@ $(function() {
                 });
             }
         })
-    }
+    });
     /*FILTRO REGIONI*/
     $(document).on("change", ".regioni", function() {
         $(".province").empty();
@@ -159,7 +163,7 @@ $(function() {
         $(".pagination").empty();
         if (((array.length) % $("#shownumber").val()) == 0) numeropagine = parseInt(array.length / $("#shownumber").val());
         else numeropagine = parseInt((array.length / $("#shownumber").val()) + 1);
-        if (numeropagine != 1) {
+        if (numeropagine != 1 && numeropagine == NaN) {
             $(".pagination").append('<li class="page-item" id="previous"> <a class="page-link" href="#main" tabindex="-1"  style="text-decoration:none"aria-disabled="true">Precedente</a> </li>');
             for (let i = 0; i < numeropagine; i++) {
                 $(".pagination").append('<li class="page-item numeri"><a class="page-link" style="text-decoration:none" href="#main">' + (i + 1) + '</a></li>');
@@ -197,7 +201,7 @@ $(function() {
             dataType: "json",
             success: function(data) {},
             error: function(xhr, status, error) {
-                $('#btnNuovoMatrimonio').modal('toggle');
+                $('#modalNuovoMatrimonio').modal('toggle');
                 document.getElementById("loading_screen").style.display = 'block';
                 AggiornaTabella();
                 persone = [];

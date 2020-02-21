@@ -2,7 +2,6 @@
 	Dopetrope by HTML5 UP
 	html5up.net | @ajlkn
     Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-
 */
 var c = 0;
 $(function() {
@@ -206,6 +205,7 @@ $(function() {
 
         })
     };
+    var d1 = $.Deferred();
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -224,7 +224,7 @@ $(function() {
             document.getElementById("loading_screen").style.display = 'none';
         }
     });
-    if (!$.active) {
+    $.when(d1).then(function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
@@ -253,8 +253,10 @@ $(function() {
                     }
                 });
             }
-        })
-    }
+        });
+    });
+
+
     /*FILTRO REGIONI*/
     $(document).on("change", ".regioni", function() {
             $(".province").empty();
