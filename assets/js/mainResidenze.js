@@ -54,8 +54,8 @@ $(function() {
             document.getElementById("loading_screen").style.display = 'none';
         }
     });
-    if (!$.active) {
-        $.ajax({
+    if($.active){
+    $.ajax({
             type: "GET",
             contentType: "application/json",
             url: "https://late-frost-5190.getsandbox.com/territorio",
@@ -78,7 +78,7 @@ $(function() {
             }
         })
     }
-    /*FILTRO REGIONI*/
+        /*FILTRO REGIONI*/
     $(document).on("change", ".regioni", function() {
         $(".province").empty();
         $(".comuni").empty();
@@ -153,20 +153,38 @@ $(function() {
         } else
             CalcPag(persone);
     });
-
+    /*CALCOLO NUMERO DELLE PAGINE*/
     function CalcPag(array) {
         $(".pagination").empty();
         if (((array.length) % $("#shownumber").val()) == 0) numeropagine = parseInt(array.length / $("#shownumber").val());
         else numeropagine = parseInt((array.length / $("#shownumber").val()) + 1);
-        if (numeropagine != 1) {
-            $(".pagination").append('<li class="page-item" id="previous"> <a class="page-link" href="#main" tabindex="-1"  style="text-decoration:none"aria-disabled="true">Precedente</a> </li>');
-            for (let i = 0; i < numeropagine; i++) {
-                $(".pagination").append('<li class="page-item numeri"><a class="page-link" style="text-decoration:none" href="#main">' + (i + 1) + '</a></li>');
-            }
-            $(".pagination").append('<li class="page-item" id="next"> <a class="page-link" href="#main" style="text-decoration:none"tabindex="-1" aria-disabled="true">Successivo</a> </li>');
+        $(".pagination").append('<li class="page-item" id="previous"> <a class="page-link" href="#main" tabindex="-1"  style="text-decoration:none"aria-disabled="true">Precedente</a> </li>');
+        for (let i = 0; i < numeropagine; i++) {
+            $(".pagination").append('<li class="page-item numeri"><a class="page-link" style="text-decoration:none" href="#main">' + (i + 1) + '</a></li>');
         }
+        $(".pagination").append('<li class="page-item" id="next"> <a class="page-link" href="#main" style="text-decoration:none"tabindex="-1" aria-disabled="true">Successivo</a> </li>');
         StampaTabella(1, $("#shownumber").val(), array);
+        CheckPag();
     }
+         /*CHECK PAGINA*/
+         function CheckPag() {
+            if (numeropagine == 1) {
+                $("#next").css("display", "none");
+                $("#previous").css("display", "none");
+            }
+            else if (numeropagine != 1 && posizioneCorrente == 1) {
+                $("#previous").css("display", "none");
+                $("#next").css("display", "initial");
+            }
+            else if (numeropagine != 1 && posizioneCorrente == numeropagine) {
+                $("#next").css("display", "none");
+                $("#previous").css("display", "initial");
+            }
+            else {
+                $("next").css("display", "initial");
+                $("#previous").css("display", "initial");
+            }
+         }
     /*SVOTA TABELLA*/
     function AggiornaTabella() {
         $("#persone").empty();
@@ -440,18 +458,21 @@ $(function() {
         if (posizioneCorrente == 1) posizioneCorrente++;
         posizioneCorrente--;
         StampaTabella(posizioneCorrente, $("#shownumber").val(), persone);
+        CheckPag();
     });
     /*CLICK SUCCESSIVO*/
     $(document).on("click", "#next", function() {
         if (posizioneCorrente == numeropagine) posizioneCorrente--;
         posizioneCorrente++;
         StampaTabella(posizioneCorrente, $("#shownumber").val(), persone);
+        CheckPag();
     });
     /*CLICK NUMERO PAGINA*/
     $(document).on("click", ".numeri>.page-link", function() {
         var testo = $(this).text();
         posizioneCorrente = testo;
         StampaTabella(testo, $("#shownumber").val(), persone);
+        CheckPag();
     });
     siteScroll();
     var $window = $(window),
