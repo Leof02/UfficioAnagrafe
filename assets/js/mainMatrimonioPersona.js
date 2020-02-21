@@ -170,7 +170,25 @@ $(function() {
             }
             $(".pagination").append('<li class="page-item" id="next"> <a class="page-link" href="#main" style="text-decoration:none"tabindex="-1" aria-disabled="true">Successivo</a> </li>');
         }
+        $(".pagination").append('<li class="page-item" id="next"> <a class="page-link" href="#main" style="text-decoration:none"tabindex="-1" aria-disabled="true">Successivo</a> </li>');
         StampaTabella(1, $("#shownumber").val(), array);
+        CheckPag();
+    }
+    /*CHECK PAGINA*/
+    function CheckPag() {
+        if (numeropagine == 1) {
+            $("#next").css("display", "none");
+            $("#previous").css("display", "none");
+        } else if (numeropagine != 1 && posizioneCorrente == 1) {
+            $("#previous").css("display", "none");
+            $("#next").css("display", "initial");
+        } else if (numeropagine != 1 && posizioneCorrente == numeropagine) {
+            $("#next").css("display", "none");
+            $("#previous").css("display", "initial");
+        } else {
+            $("next").css("display", "initial");
+            $("#previous").css("display", "initial");
+        }
     }
     /*SVOTA TABELLA*/
     function AggiornaTabella() {
@@ -473,18 +491,21 @@ $(function() {
         if (posizioneCorrente == 1) posizioneCorrente++;
         posizioneCorrente--;
         StampaTabella(posizioneCorrente, $("#shownumber").val(), persone);
+        CheckPag();
     });
     /*CLICK SUCCESSIVO*/
     $(document).on("click", "#next", function() {
         if (posizioneCorrente == numeropagine) posizioneCorrente--;
         posizioneCorrente++;
         StampaTabella(posizioneCorrente, $("#shownumber").val(), persone);
+        CheckPag();
     });
     /*CLICK NUMERO PAGINA*/
     $(document).on("click", ".numeri>.page-link", function() {
         var testo = $(this).text();
         posizioneCorrente = testo;
         StampaTabella(testo, $("#shownumber").val(), persone);
+        CheckPag();
     });
     siteScroll();
     var $window = $(window),
@@ -541,4 +562,5 @@ $(function() {
             target: $body,
             visibleClass: 'navPanel-visible'
         });
+
 });

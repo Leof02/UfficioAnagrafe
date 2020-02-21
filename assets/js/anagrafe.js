@@ -634,12 +634,14 @@ function addPieChart() {
             title: {
                 display: true,
                 text: "Popolazione regioni attuale",
-                fontSize: 40
+                fontSize: 45,
+                padding: 20,
             },
             legend: {
                 display: true,
                 position: "right",
                 labels: {
+                    fontSize: 20,
                     fontColor: "#000",
                 }
             },
